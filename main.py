@@ -5,6 +5,7 @@ import pytz;
 from datetime import datetime
 import util
 import json
+import threading
 
 # The API endpoint
 shopId = "142804872"
@@ -157,8 +158,31 @@ def buyShopee():
     placeOrder(checkoutGet())
     return schedule.CancelJob
 
+def startMultiThread():
+    t1 = threading.Thread(target=buyShopee, args=())
+    t2 = threading.Thread(target=buyShopee, args=())
+    t3 = threading.Thread(target=buyShopee, args=())
+    t4 = threading.Thread(target=buyShopee, args=())
+    t5 = threading.Thread(target=buyShopee, args=())
+    t6 = threading.Thread(target=buyShopee, args=())
 
-schedule.every().day.at('21:15','Asia/Jakarta').do(buyShopee)
+    t1.start()
+    t2.start()
+    t3.start()
+    t4.start()
+    t5.start()
+    t6.start()
+
+    t1.join()
+    t2.join()
+    t3.join()
+    t4.join()
+    t5.join()
+    t6.join()
+
+
+
+schedule.every().day.at('10:30','Asia/Jakarta').do(startMultiThread)
 
 
 while True:
