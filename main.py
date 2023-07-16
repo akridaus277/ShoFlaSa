@@ -8,9 +8,9 @@ import json
 import threading
 
 # The API endpoint
-shopId = "15607053"
-itemId = "14861010761"
-modelId = "124584001285"
+shopId = "815542200"
+itemId = "18722279651"
+modelId = "181167356824"
 
 responseCheckout = {}
 
@@ -18,7 +18,7 @@ urlAddToCart = "https://shopee.co.id/api/v4/cart/add_to_cart"
 urlGetItemsBrief = "https://shopee.co.id/api/v4/cart/get_items_brief"
 urlCheckoutGet = "https://shopee.co.id/api/v4/checkout/get"
 urlPlaceOrder = "https://shopee.co.id/api/v4/checkout/place_order"
-headers = {"Cookie": '__LOCALE__null=ID; _gcl_au=1.1.452601646.1689505958; _med=refer; _fbp=fb.2.1689505958262.105414962; csrftoken=HXn4GL0j5gSIiiX5YFkENehv2cZsCKHI; SPC_SI=atibZAAAAAB6OHA1cjRaT5NeAQEAAAAARU1vWlN5Qmc=; SPC_F=7DooppIaCGCQzkBz87IEFh3rhxyuAiqZ; REC_T_ID=b1d77508-23c9-11ee-bf78-f4ee0828fa05; _QPWSDCXHZQA=ea6bb0b2-2711-4d58-e707-f38ffcd74d20; AMP_TOKEN=%24NOT_FOUND; _gid=GA1.3.2063080919.1689505964; SPC_CLIENTID=N0Rvb3BwSWFDR0NRdjxratdrrkcjfsem; SPC_ST=.UERqbHdGd21IbDNja1oyTlqObG09L4N2kGwLPFH7/J6C1xd0vC1EK/MR86hYS5zt+md/4NIHKLaowSp2bdcA3UfbcW4MaggYtkUj4GXzzYvYa5/gxVMCt7Fhku2ycFR1irxzWb27UyTfU3nI512b+eAlbUeS24EY5FmkVjRCKBLbuaxHFvMSW6tbnktn/d24Y/xFnT8B+mjmVWN59YNiFg==; SPC_U=230630720; SPC_IA=1; SPC_R_T_ID=Ep1uaFEOtn8tAe0XuWEbERloKPZIo0QGMLKmo+9TAdA5NF0UwrpbvhVAIALE05gQMK3fQHjMecUBIFi3objuMpcfRs3t9yodX5wGYLn7mMvchvgKXN+1jeq8pk5kmx3eXlOAH8Ty2f7NSMJL6+7AXrJdjdbF3W3Hq1fUZiBkS4c=; SPC_R_T_IV=MmVXTHFnZjdOY3I4d3dqVA==; SPC_T_ID=Ep1uaFEOtn8tAe0XuWEbERloKPZIo0QGMLKmo+9TAdA5NF0UwrpbvhVAIALE05gQMK3fQHjMecUBIFi3objuMpcfRs3t9yodX5wGYLn7mMvchvgKXN+1jeq8pk5kmx3eXlOAH8Ty2f7NSMJL6+7AXrJdjdbF3W3Hq1fUZiBkS4c=; SPC_T_IV=MmVXTHFnZjdOY3I4d3dqVA==; shopee_webUnique_ccd=j7bMZ4yzbzTfDcG0XKiitA%3D%3D%7CLslRc%2FyklS6vM3YOzZdmOUkzREXkpfPblLDxnei26hgAuh6JDjqisAKCm%2BayZYJ29IunkOzRlzkCp34frYAv0GPhMTvIbP996Q%3D%3D%7CYRtzMb1jQnuNwNWs%7C06%7C3; ds=8dfe5c352e05117bf8c89e5a8b696b90; _ga_SW6D8G0HXK=GS1.1.1689505962.1.1.1689506718.55.0.0; _ga=GA1.1.907174497.1689505963; SPC_EC=Rm5xQ0M3OFhET1lRQUpabdVbUee5mOgQ3NC3ypKfRIfbv871sUHy8lRvg2mjaQMm1Y+9I22e5vBA7wddP7yxfN1ABidUg3oFdcRuT7pkNC+a9lSNbs/NKya7yKz9wB/4uYyj9zp0bBm1QHWTe5AD7b4zaVRkYT2gkOLVdcISL6U=; _dc_gtm_UA-61904553-8=1'}
+headers = {"Cookie": '__LOCALE__null=ID; _gcl_au=1.1.452601646.1689505958; _med=refer; _fbp=fb.2.1689505958262.105414962; csrftoken=HXn4GL0j5gSIiiX5YFkENehv2cZsCKHI; SPC_SI=atibZAAAAAB6OHA1cjRaT5NeAQEAAAAARU1vWlN5Qmc=; SPC_F=7DooppIaCGCQzkBz87IEFh3rhxyuAiqZ; REC_T_ID=b1d77508-23c9-11ee-bf78-f4ee0828fa05; _QPWSDCXHZQA=ea6bb0b2-2711-4d58-e707-f38ffcd74d20; AMP_TOKEN=%24NOT_FOUND; _gid=GA1.3.2063080919.1689505964; SPC_CLIENTID=N0Rvb3BwSWFDR0NRdjxratdrrkcjfsem; SPC_IA=1; SPC_ST=.ZUFyU01nQzIzUmJpRzh3egQYlJip6s1IF3jcnsnCZoNOCp7QGISn+PkfIfr0paWaJrOC0BhASpOEmXkH0yBmugGF5sx8+zA8teACg3OGZP2mnhm0ldhnybDN+eymGFyejREJ+5PNtuD6mJBUwjW80wRYuHhE++T5hspISdl1bvQxC6LSrn7Ac9L8/GAcljgu0vJ/epMTQmOCyw1CEgHOGQ==; SPC_U=215271137; SPC_R_T_ID=JaZ4rigW8zlulDUSmohsEQ4xJax04AueJwYy9N2isV8koOgFK3vYxB6mjlVBPApb0Y77zWzDVCEAYWluqjIkqigZaoJ9211DOgNSwssdpTYvFPtI8tUepXssWrtDkE9Fa4Zm//aVvaVrKapAl0SR4Ws2mzlpH5mLojoxULolUp4=; SPC_R_T_IV=N2s5dlh3TmE0RjRsVDJESg==; SPC_T_ID=JaZ4rigW8zlulDUSmohsEQ4xJax04AueJwYy9N2isV8koOgFK3vYxB6mjlVBPApb0Y77zWzDVCEAYWluqjIkqigZaoJ9211DOgNSwssdpTYvFPtI8tUepXssWrtDkE9Fa4Zm//aVvaVrKapAl0SR4Ws2mzlpH5mLojoxULolUp4=; SPC_T_IV=N2s5dlh3TmE0RjRsVDJESg==; _ga=GA1.1.907174497.1689505963; SPC_EC=RnBEc056UEdhR2tBMTdxbL4KI7Bdfmlj2w0DDw6Kxr8W56PUfiQozIGt0zXdRMu8DwgNzeiyc8bju3xIfeub1CeysdG11CAetkYajuj3aoYA7peYwyXMbot0M/bOrg01CSVqseBb0Kye2IDbyRczHhnOmtfzHXD9fbFz4YPdNLs=; shopee_webUnique_ccd=g7jQcEHliRJeDaQH65WodA%3D%3D%7CLtZGdPKskCipP3kNypBiPUk%2BSUnvsbPfwrH9keTt7ElQ7huKAWD4uFDYm%2BixNN5899zwkOXchC4FqX8TqIYv22bhMTPXeeoy5JM%3D%7CYRtzMb1jQnuNwNWs%7C06%7C3; ds=d990ca20e7b69c3583f75bf24c144fb6; _ga_SW6D8G0HXK=GS1.1.1689505962.1.1.1689507942.60.0.0'}
 
     
 def addToCart():
@@ -190,20 +190,20 @@ def startMultiThread():
     # t5.join()
     # t6.join()
 
-# startMultiThread()
+startMultiThread()
 
-schedule.every().day.at('13:29','Asia/Jakarta').do(startMultiThread)
+# schedule.every().day.at('13:29','Asia/Jakarta').do(startMultiThread)
 
 
-while True:
-    fmt = '%Y-%m-%d %H:%M:%S %Z%z'
-    jakartaTz = pytz.timezone('Asia/Jakarta')
-    timeInJakarta = datetime.now(jakartaTz)
-    currentTimeInJakarta = timeInJakarta.strftime(fmt)
+# while True:
+#     fmt = '%Y-%m-%d %H:%M:%S %Z%z'
+#     jakartaTz = pytz.timezone('Asia/Jakarta')
+#     timeInJakarta = datetime.now(jakartaTz)
+#     currentTimeInJakarta = timeInJakarta.strftime(fmt)
 
-    print("The current time in Jakarta is:", currentTimeInJakarta)
-    schedule.run_pending()
-    time.sleep(1)
+#     print("The current time in Jakarta is:", currentTimeInJakarta)
+#     schedule.run_pending()
+#     time.sleep(1)
 
 
 
