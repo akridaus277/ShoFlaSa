@@ -8,51 +8,18 @@ import json
 import threading
 
 # The API endpoint
-shopId = "142804872"
-itemId = "2243939219"
-modelId = "4267732324"
-
-promotionId = ""
-price = 0
-addressId = ""
+shopId = "15607053"
+itemId = "14861010761"
+modelId = "124584001285"
 
 responseCheckout = {}
 
-
-
-urlGetAddress = "https://shopee.co.id/api/v4/account/address/get_user_address_list?with_warehouse_whitelist_status=true"
-urlGetProduct = "https://shopee.co.id/api/v4/product/get_purchase_quantities_for_selected_model?itemId={itemId}&modelId={modelId}&quantity=1&shopId={shopId}".format(itemId=itemId, modelId=modelId, shopId=shopId)
 urlAddToCart = "https://shopee.co.id/api/v4/cart/add_to_cart"
+urlGetItemsBrief = "https://shopee.co.id/api/v4/cart/get_items_brief"
 urlCheckoutGet = "https://shopee.co.id/api/v4/checkout/get"
 urlPlaceOrder = "https://shopee.co.id/api/v4/checkout/place_order"
-headers = {"Cookie": "__LOCALE__null=ID; _gcl_au=1.1.883725504.1689169744; csrftoken=7Z8hYpZ0rStgXUr2lQ76GipRsVekH19q; SPC_R_T_ID=WyM0Ny/kFRwhoDilWhp1O9nfThR3WNEYZ1Kzq3d9oj9DfjTisL79UWYbNWNaduCXHc4dV+96QMgzrpVSg5pqRteXfeuTGcyntQTexDjI+NWsKLKgx9Ku9dyvTHGqynbkznx6vOEvknvqz0qUtpxqf6GCphkQ0jbcNGvHxbmUQP8=; SPC_R_T_IV=cmJxM2o1cklxTUREU01aag==; SPC_T_ID=WyM0Ny/kFRwhoDilWhp1O9nfThR3WNEYZ1Kzq3d9oj9DfjTisL79UWYbNWNaduCXHc4dV+96QMgzrpVSg5pqRteXfeuTGcyntQTexDjI+NWsKLKgx9Ku9dyvTHGqynbkznx6vOEvknvqz0qUtpxqf6GCphkQ0jbcNGvHxbmUQP8=; SPC_T_IV=cmJxM2o1cklxTUREU01aag==; SPC_SI=F62aZAAAAABIOHRnVzRTOKyOZgAAAAAAcGdTekVxa0w=; SPC_F=6UDULxda53gK12M9llnHVX7oOHuoyhXk; REC_T_ID=dc3775c0-20ba-11ee-8315-2cea7fa4f854; _fbp=fb.2.1689169745475.619477051; _QPWSDCXHZQA=2c313eae-b382-4cdf-c698-810c637a9579; _ga_SW6D8G0HXK=GS1.1.1689169748.1.1.1689169838.33.0.0; _ga=GA1.3.129087050.1689169749; shopee_webUnique_ccd=LDwge%2BjDaF8oUZjrgLExQg%3D%3D%7CbVLLhXwkahHWhJevdXivcisseEK6ymtrC3Iv3Z86j4tcGY0utDDdSq%2F4VEChNrJyKExoA7OkPl6A2lzvQ7gZ6Tb5vLtig%2FBjkA%3D%3D%7Cfjfcf0zlpSbXzOMQ%7C06%7C3; ds=37984356c6600f4b45c8f40b34788503; AMP_TOKEN=%24NOT_FOUND; _gid=GA1.3.1582871121.1689169750; SPC_CLIENTID=NlVEVUx4ZGE1M2dLvqqlklbroqhsvhcf; SPC_EC=N2VxZlBtejdYWUJsTDZaaA0P1ohzAbr5acK0LJYFrixKsGKjGljb8X+Z9uZqn9dDZI+cXz/bc4C6BUBazWl8ynBf4yynNyiG+qLwNYbvLvHIuonmV0s0gjRfu/xJkHaHcUaRcIu4JxbzXphlr9BqbQzidU/g4Ytre6uevXFHBTf/jPpywkbAJSg0otuUFvY3; SPC_ST=.R2lWWWZWcFF5anQzbEN0MiFdgprFan9qijw9InRrNarPmLGz6zadUFfRyog1tjU2FX1cMuSCtQcpx9u7/u3Sl9xy3qhAEE4/LoJDQnpuU7Rg/uvfNsMSdcvhaiqGNDgfpQDjvpu+/afvYc/sIgm7oYODaf91VeyEs9+8mwXs/4P+/oZSvZmxrIiX2ACj890xMO9HgBxIWbmDtMgjj+jn1Q==; SPC_U=508807733; SPC_IA=1; _dc_gtm_UA-61904553-8=1"}
+headers = {"Cookie": '__LOCALE__null=ID; _gcl_au=1.1.452601646.1689505958; _med=refer; _fbp=fb.2.1689505958262.105414962; csrftoken=HXn4GL0j5gSIiiX5YFkENehv2cZsCKHI; SPC_SI=atibZAAAAAB6OHA1cjRaT5NeAQEAAAAARU1vWlN5Qmc=; SPC_F=7DooppIaCGCQzkBz87IEFh3rhxyuAiqZ; REC_T_ID=b1d77508-23c9-11ee-bf78-f4ee0828fa05; _QPWSDCXHZQA=ea6bb0b2-2711-4d58-e707-f38ffcd74d20; AMP_TOKEN=%24NOT_FOUND; _gid=GA1.3.2063080919.1689505964; SPC_CLIENTID=N0Rvb3BwSWFDR0NRdjxratdrrkcjfsem; SPC_ST=.UERqbHdGd21IbDNja1oyTlqObG09L4N2kGwLPFH7/J6C1xd0vC1EK/MR86hYS5zt+md/4NIHKLaowSp2bdcA3UfbcW4MaggYtkUj4GXzzYvYa5/gxVMCt7Fhku2ycFR1irxzWb27UyTfU3nI512b+eAlbUeS24EY5FmkVjRCKBLbuaxHFvMSW6tbnktn/d24Y/xFnT8B+mjmVWN59YNiFg==; SPC_U=230630720; SPC_IA=1; SPC_R_T_ID=Ep1uaFEOtn8tAe0XuWEbERloKPZIo0QGMLKmo+9TAdA5NF0UwrpbvhVAIALE05gQMK3fQHjMecUBIFi3objuMpcfRs3t9yodX5wGYLn7mMvchvgKXN+1jeq8pk5kmx3eXlOAH8Ty2f7NSMJL6+7AXrJdjdbF3W3Hq1fUZiBkS4c=; SPC_R_T_IV=MmVXTHFnZjdOY3I4d3dqVA==; SPC_T_ID=Ep1uaFEOtn8tAe0XuWEbERloKPZIo0QGMLKmo+9TAdA5NF0UwrpbvhVAIALE05gQMK3fQHjMecUBIFi3objuMpcfRs3t9yodX5wGYLn7mMvchvgKXN+1jeq8pk5kmx3eXlOAH8Ty2f7NSMJL6+7AXrJdjdbF3W3Hq1fUZiBkS4c=; SPC_T_IV=MmVXTHFnZjdOY3I4d3dqVA==; shopee_webUnique_ccd=j7bMZ4yzbzTfDcG0XKiitA%3D%3D%7CLslRc%2FyklS6vM3YOzZdmOUkzREXkpfPblLDxnei26hgAuh6JDjqisAKCm%2BayZYJ29IunkOzRlzkCp34frYAv0GPhMTvIbP996Q%3D%3D%7CYRtzMb1jQnuNwNWs%7C06%7C3; ds=8dfe5c352e05117bf8c89e5a8b696b90; _ga_SW6D8G0HXK=GS1.1.1689505962.1.1.1689506718.55.0.0; _ga=GA1.1.907174497.1689505963; SPC_EC=Rm5xQ0M3OFhET1lRQUpabdVbUee5mOgQ3NC3ypKfRIfbv871sUHy8lRvg2mjaQMm1Y+9I22e5vBA7wddP7yxfN1ABidUg3oFdcRuT7pkNC+a9lSNbs/NKya7yKz9wB/4uYyj9zp0bBm1QHWTe5AD7b4zaVRkYT2gkOLVdcISL6U=; _dc_gtm_UA-61904553-8=1'}
 
-# print(pytz.all_timezones)
-
-def getProduct():
-    print("I'm working Get Product...")
-    # A GET request to the API
-    response = requests.get(url=urlGetProduct,headers=headers)
-
-    # Print the response
-    response_json = response.json()
-    promotionId = response_json['selected_price_and_stock']['promotion_id']
-    price = response_json['selected_price_and_stock']['display_price']
-
-    print("Completed Get Product...")
-    
-def getAddress():
-    print("I'm working Get Address...")
-    # A GET request to the API
-    response = requests.get(url=urlGetAddress,headers=headers)
-
-    # Print the response
-    response_json = response.json()
-    addressId = response_json['data']['addresses'][0]['id']
-    print(addressId)
-
-    print("Completed Get Product...")
-    
     
 def addToCart():
     print("I'm working Add To Cart...")
@@ -73,8 +40,44 @@ def addToCart():
     # Print the response
     response_json = response.json()
     print("Completed Add To Cart...")
+
+def getItemsBrief():
+    print("I'm working Get Items Brieff...")
+    # A POST request to the API
+    requestBody = {
+            "shoporders": [
+                {
+                    "shopid": int(shopId),
+                    "itemids": [
+                        int(itemId)
+                    ]
+                }
+        ]
+    }
+
+
+    # A POST request to the API
+    response = requests.post(url=urlGetItemsBrief,headers=headers,json=requestBody)
+   
+    # Print the response
+    response_json = response.json()
+    # add_on_deal_id = response_json['data']['']['add_on_deal_id']
+    print(response_json)
+
+    addOnDealId = response_json['data']['shoporders'][0]['iteminfos'][0]['add_on_deal_id']
+    itemGroupId = response_json['data']['shoporders'][0]['iteminfos'][0]['item_group_id']
+
+    responseArray = [addOnDealId, itemGroupId]
     
-def checkoutGet():
+    return responseArray
+    
+   
+    
+def checkoutGet(itemsBriefResponse):
+    addOnDealId = itemsBriefResponse[0]
+    itemGroupId = itemsBriefResponse[1]
+    print(addOnDealId is None)
+    print(itemGroupId is None)
     print("I'm working Checkout Get...")
     requestBody = {
         "_cft": [],
@@ -88,15 +91,23 @@ def checkoutGet():
                         "itemid": int(itemId),
                         "modelid": int(modelId),
                         "quantity": 1,
-                        "add_on_deal_id": 0,
+                        "add_on_deal_id": 0 if addOnDealId is None else int(addOnDealId),
                         "is_add_on_sub_item": False,
-                        "item_group_id": "null",
+                        "item_group_id": "null" if itemGroupId is None else itemGroupId,
                         "insurances": []
                     }
                 ]
             }
         ],
-        "selected_payment_channel_data": {},
+        "selected_payment_channel_data": {
+            "version": 2,
+            "option_info": "",
+            "channel_id": 8005200,
+            "channel_item_option_info": {
+                "option_info": "89052002"
+            },
+            "text_info": {}
+        },
         "promotion_data": {
             "use_coins": False,
             "free_shipping_voucher_info": {
@@ -126,7 +137,7 @@ def checkoutGet():
     # Print the response
     response_json = response.json()
 
-    
+    print(response_json)
     
     print("Completed Checkout Get...")
     return response_json
@@ -145,7 +156,7 @@ def placeOrder(requestBody):
     util.map(responseCheckout,requestPlaceOrder)
     # A POST request to the API
     response = requests.post(url=urlPlaceOrder,headers=headers,json=requestBody)
-
+    # print(requestBody)
     # Print the response
     response_json = response.json()
     print(response_json)
@@ -153,36 +164,35 @@ def placeOrder(requestBody):
 
 
 def buyShopee():
-    getProduct()
     addToCart()
-    placeOrder(checkoutGet())
+    placeOrder(checkoutGet(getItemsBrief()))
     return schedule.CancelJob
 
 def startMultiThread():
     t1 = threading.Thread(target=buyShopee, args=())
-    t2 = threading.Thread(target=buyShopee, args=())
-    t3 = threading.Thread(target=buyShopee, args=())
-    t4 = threading.Thread(target=buyShopee, args=())
-    t5 = threading.Thread(target=buyShopee, args=())
-    t6 = threading.Thread(target=buyShopee, args=())
+    # t2 = threading.Thread(target=buyShopee, args=())
+    # t3 = threading.Thread(target=buyShopee, args=())
+    # t4 = threading.Thread(target=buyShopee, args=())
+    # t5 = threading.Thread(target=buyShopee, args=())
+    # t6 = threading.Thread(target=buyShopee, args=())
 
     t1.start()
-    t2.start()
-    t3.start()
-    t4.start()
-    t5.start()
-    t6.start()
+    # t2.start()
+    # t3.start()
+    # t4.start()
+    # t5.start()
+    # t6.start()
 
     t1.join()
-    t2.join()
-    t3.join()
-    t4.join()
-    t5.join()
-    t6.join()
+    # t2.join()
+    # t3.join()
+    # t4.join()
+    # t5.join()
+    # t6.join()
 
+# startMultiThread()
 
-
-schedule.every().day.at('10:30','Asia/Jakarta').do(startMultiThread)
+schedule.every().day.at('13:29','Asia/Jakarta').do(startMultiThread)
 
 
 while True:
