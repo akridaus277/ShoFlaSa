@@ -50,10 +50,10 @@ def map(responseDict, requestDict):
 
     if len(sliced) != 0:
         message = ", "
-        print("data kurang lengkap:" + message.join(sliced))
+        # print("data kurang lengkap:" + message.join(sliced))
         return
 
-    print(len(sliced))
+    # print(len(sliced))
 
     searchTree(responseDict, listKey)
     searchTree(requestDict, assignValue)
